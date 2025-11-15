@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trans Jateng - Beranda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        :root {
+            --primary-red: #d92329;
+            --dark-red: #8b1317;
+            --secondary-black: #212529;
+            --light-gray: #f8f9fa;
+        }
+
+        .navbar-custom {
+            background-color: transparent !important;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .navbar-custom.navbar-scrolled {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #fff !important;
+            font-weight: bolder;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Hapus btn-daftar karena tidak digunakan lagi */
+        /* .btn-daftar { ... } */
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .ticket-form-container {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            width: 80%;
+            background-color: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ticket-form-header {
+            background-color: var(--secondary-black);
+            color: white;
+            padding: 8px 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: inline-block;
+            transform: translateY(-50%);
+            margin-left: -5px;
+        }
+
+        .form-control-custom,
+        .form-select-custom {
+            height: 50px;
+            padding-left: 45px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        .input-group-custom {
+            position: relative;
+        }
+
+        .input-group-custom i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-red);
+            z-index: 10;
+        }
+
+        .btn-cari-tiket {
+            background-color: var(--primary-red);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            height: 50px;
+            width: 100%;
+        }
+
+        .btn-cari-tiket:hover {
+            background-color: var(--dark-red);
+            color: white;
+        }
+
+        .experience-section {
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+
+        .red-banner.carousel-container {
+            position: relative;
+            width: 100%;
+            padding-top: 22.115%;
+            overflow: hidden;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+        }
+
+        .carousel-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 40px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 4px;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-button-left {
+            left: 10px;
+        }
+
+        .carousel-button-right {
+            right: 10px;
+        }
+
+        .features-section {
+            background-color: var(--dark-red);
+            padding: 50px 0;
+            color: white;
+        }
+
+        .feature-card {
+            background-color: #a81a1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s;
+            height: 350px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .feature-card h4 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: left;
+            margin-bottom: 0;
+        }
+        
+        /* CSS Khusus Dropdown Profil */
+        .profile-dropdown-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #fff;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 0;
+            min-width: 150px;
+            right: 0 !important;
+            left: auto !important;
+            transform: translate(0, 8px) !important;
+            background-color: #fff;
+        }
+        .dropdown-item {
+            font-weight: 600;
+            padding: 10px 15px;
+            color: var(--secondary-black);
+            transition: background-color 0.2s;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+        /* Mengganti tulisan 'About Me' di Navbar menjadi 'TENTANG KAMI' (sesuai file lama) atau 'ABOUT ME' (sesuai gambar) */
+        .navbar-nav .nav-item:nth-child(3) .nav-link {
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="./beranda.html">
+                <img src="../gambar/Logo.png" alt="Logo" width="100" height="65"
+                    class="d-inline-block align-text-top me-2" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered"
+                aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavCentered">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./beranda.html">BERANDA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./armada.html">KELAS ARMADA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./tentangkami.html">ABOUT ME</a> 
+                        </li>
+                </ul>
+
+                <div class="nav-item dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
+                        <i class="fas fa-user-circle profile-dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">My Profil</a></li>
+                        <li><a class="dropdown-item" href="#">My Tiket</a></li>
+                    </ul>
+                </div>
+                </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <img src="../gambar/beranda1.png" class="hero-image" alt="Bus Trans Jateng" />
+        <div class="hero-overlay"></div>
+
+        <div class="ticket-form-container">
+            <div class="ticket-form-header">Cari Tiket Bus</div>
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group-custom">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" class="form-control form-control-custom" placeholder="Kota Asal" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group-custom">
+                        <i class="fas fa-location-arrow"></i>
+                        <input type="text" class="form-control form-control-custom" placeholder="Kota Tujuan" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group-custom">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="form-control form-control-custom" id="departure-date"
+                            placeholder="DD/MM/YYYY"
+                            onfocus="this.type='date'; if(!this.value) { const today = new Date().toISOString().split('T')[0]; this.value = today; }"
+                            onblur="this.type='text'; if(this.value) { const date = new Date(this.value); const day = String(date.getDate()).padStart(2, '0'); const month = String(date.getMonth() + 1).padStart(2, '0'); const year = date.getFullYear(); this.value = `${day}/${month}/${year}`; }" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group-custom">
+                        <i class="fas fa-chair"></i>
+                        <input type="number" class="form-control form-control-custom" placeholder="Jumlah Kursi"
+                            min="1" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group-custom">
+                        <i class="fas fa-bus"></i>
+                        <select class="form-select form-select-custom">
+                            <option selected>Kelas Armada</option>
+                            <option value="1">Ekonomi</option>
+                            <option value="2">Executive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-cari-tiket">Cari Tiket</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <hr class="mt-0" />
+
+    <section class="experience-section">
+        <div class="container text-center">
+            <div class="red-banner carousel-container">
+                <div class="carousel-slides">
+                    <div class="carousel-slide active">
+                        <img src="../gambar/baner1.png" alt="Banner 1" />
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../gambar/baner2.png" alt="Banner 1" />
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../gambar/baner3.png" alt="Banner 1" />
+                    </div>
+                    </div>
+
+                <button class="carousel-button carousel-button-left" aria-label="Previous Slide">&#10094;</button>
+                <button class="carousel-button carousel-button-right" aria-label="Next Slide">&#10095;</button>
+            </div>
+
+            <h3 class="mb-4">**Trans Jateng Experience**</h3>
+            <p class="lead mb-5 px-lg-5">
+                Trans Jateng Experience merupakan wujud nyata komitmen Trans Jateng dalam memberikan pelayanan terbaik
+                dan pengalaman perjalanan yang berkesan bagi seluruh penumpang. Kami memahami bahwa setiap perjalanan
+                bukan sekadar perpindahan dari satu tempat ke tempat lain, tetapi juga bagian penting dari keseharian
+                dan momen berharga dalam hidup Anda. Karena itu, kami berupaya menghadirkan layanan yang menyeluruh
+                mulai dari proses pemesanan tiket yang mudah dan cepat, fasilitas perjalanan yang aman, nyaman, dan
+                tepat waktu, hingga layanan purna perjalanan yang tetap memprioritaskan kepuasan pelanggan. Dengan
+                armada yang modern, kru profesional, serta standar keselamatan tinggi, Trans Jateng berkomitmen menjadi
+                mitra perjalanan an dalan yang dapat diandalkan di setiap rute. Kami terus berinovasi untuk memastikan
+                bahwa setiap detik perjalanan Anda bersama Trans Jateng bukan hanya efisien dan menyenangkan, tetapi
+                juga meninggalkan kesan positif yang mendalam.
+            </p>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="../gambar/cardb1.png" alt="Keramahan Awak Bus" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Keramahan Awak Bus Dan Layanan Pramugara/i</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="../gambar/cardb2.png" alt="Benefit Member Plus" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Benefit Tambahan Dengan Member Plus</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="../gambar/cardb3.png" alt="Pilihan Kelas" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Pilihan Kelas Dengan Beragam Fasilitas Yang Tersedia</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr />
+
+    <section class="features-section">
+        <div class="container">
+            <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="./gambar/cardb1.png" alt="Keramahan Awak Bus" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Keramahan Awak Bus Dan Layanan Pramugara/i</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="./gambar/cardb2.png" alt="Benefit Member Plus" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Benefit Tambahan Dengan Member Plus</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="feature-card">
+                        <img src="./gambar/cardb3.png" alt="Pilihan Kelas" class="img-fluid" />
+                        <div class="feature-image-overlay">
+                            <h4>Pilihan Kelas Dengan Beragam Fasilitas Yang Tersedia</h4>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 0) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('departure-date');
+            const date = new Date(today);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            dateInput.value = `${day}/${month}/${year}`;
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const slidesContainer = document.querySelector('.carousel-slides');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const btnLeft = document.querySelector('.carousel-button-left');
+            const btnRight = document.querySelector('.carousel-button-right');
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+
+            function updateSlidePosition() {
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            function showNextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlidePosition();
+            }
+
+            function showPrevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlidePosition();
+            }
+
+            btnRight.addEventListener('click', function () {
+                showNextSlide();
+                resetInterval();
+            });
+
+            btnLeft.addEventListener('click', function () {
+                showPrevSlide();
+                resetInterval();
+            });
+
+            let autoSlideInterval = setInterval(showNextSlide, 5000);
+
+            function resetInterval() {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = setInterval(showNextSlide, 5000);
+            }
+        });
+    </script>
+</body>
+
+</html>

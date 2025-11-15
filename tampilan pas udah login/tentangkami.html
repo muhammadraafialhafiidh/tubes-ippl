@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trans Jateng - Tentang Kami</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        /* --- CSS Khusus dari tes2.html (Hanya yang relevan) --- */
+        :root {
+            --primary-red: #d92329;
+            --dark-red: #8b1317;
+            --secondary-black: #212529;
+            --light-gray: #f8f9fa;
+        }
+
+        .navbar-custom {
+            background-color: transparent !important;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .navbar-custom.navbar-scrolled {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #fff !important;
+            font-weight: bolder;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Hapus btn-daftar karena tidak digunakan lagi */
+        /* .btn-daftar { ... } */
+
+        /* --- CSS Khusus Halaman Tentang Kami --- */
+        .header-tentang-kami {
+            /* Warna merah Trans Jateng untuk bagian atas */
+            background-color: gray;
+            color: rgb(0, 0, 0);
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .content-section {
+            padding: 50px 0;
+        }
+
+        .about-image-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        .about-image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        /* Styling untuk Visi Misi dan Motto */
+        .vision-mission h2, .mission-list h2, .motto h2 {
+            color: var(--primary-red);
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .vision-mission p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .mission-list ol {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            padding-left: 20px;
+            list-style-type: none; /* Hilangkan numbering default */
+            counter-reset: mission-counter; /* Reset counter */
+        }
+        
+        .mission-list li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            padding-left: 30px; /* Ruang untuk nomor kustom */
+            position: relative;
+        }
+        
+        .mission-list li::before {
+            counter-increment: mission-counter;
+            content: counter(mission-counter) ".";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--primary-red);
+            font-size: 1.2rem;
+            top: 0;
+        }
+        
+        .motto h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--secondary-black);
+            margin-top: 15px;
+        }
+
+        /* CSS Khusus Dropdown Profil */
+        .profile-dropdown-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #fff;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 0;
+            min-width: 150px;
+            right: 0 !important;
+            left: auto !important;
+            transform: translate(0, 8px) !important;
+            background-color: #fff;
+        }
+        .dropdown-item {
+            font-weight: 600;
+            padding: 10px 15px;
+            color: var(--secondary-black);
+            transition: background-color 0.2s;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+        /* Mengganti tulisan 'About Me' di Navbar menjadi 'TENTANG KAMI' (sesuai file lama) atau 'ABOUT ME' (sesuai gambar) */
+        .navbar-nav .nav-item:nth-child(3) .nav-link {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="./beranda.html">
+                <img src="../gambar/Logo.png" alt="Logo" width="100" height="65" class="d-inline-block align-text-top me-2" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered"
+                aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavCentered">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./beranda.html">BERANDA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./armada.html">KELAS ARMADA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./tentangkami.html">ABOUT ME</a>
+                    </li>
+                </ul>
+
+                <div class="nav-item dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
+                        <i class="fas fa-user-circle profile-dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">My Profil</a></li>
+                        <li><a class="dropdown-item" href="#">My Tiket</a></li>
+                    </ul>
+                </div>
+                </div>
+        </div>
+    </nav>
+
+    <header class="header-tentang-kami">
+        <div class="container">
+        </div>
+    </header>
+
+    <section class="content-section bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <h1 class="display-4 fw-bold text-xl-center">Tentang Kami</h1>
+                <div class="col-lg-10">
+                    <div class="about-image-container">
+                        <img src="../gambar/about.png"alt="Pengemudi Bus Trans Jateng">
+                    </div>
+
+                    <h2 class="text-center fw-bold mb-4" style="color: var(--secondary-black);">PT Trans Jawa Transport</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        PT Trans Jawa Transport adalah perusahaan transportasi darat yang terus berkembang pesat dan menjadi salah satu perusahaan pribumi yang diperhitungkan dalam industri jasa angkutan di Indonesia. Sejak awal berdiri, Trans Jawa hadir sebagai solusi mobilitas masyarakat dengan layanan yang mengutamakan kenyamanan, ketepatan waktu, dan keselamatan.
+                    </p>
+                    
+                    <p class="fs-5 text-muted">
+                        Ketatnya persaingan transportasi darat sejak era 1990-an tidak menjadi hambatan, melainkan menjadi titik tolak bagi Trans Jawa untuk bertransformasi dari layanan Antar Kota Dalam Provinsi (AKDP) menjadi Antar Kota Antar Provinsi (AKAP) dengan jangkauan lebih luas dan sistem pelayanan yang semakin handal. Didukung oleh lebih dari 1.000 tenaga profesional serta jaringan kantor perwakilan dan agen yang tersebar di Pulau Jawa hingga Sumatera, Trans Jawa kini siap melayani berbagai kebutuhan transportasi, termasuk layanan pariwisata dan carter bus khusus dengan armada modern berstandar tinggi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section bg-light">
+        <div class="container text-center">
+            
+            <div class="vision-mission mb-5">
+                <h2 class="mb-4">Visi & Misi</h2>
+                <h2 class="text-center" style="font-size: 1.5rem; color: var(--secondary-black);">Visi</h2>
+                <p>
+                    Menjadi perusahaan transportasi darat yang unggul dalam kualitas pelayanan dan keselamatan di Indonesia, dengan komitmen memberikan pengalaman perjalanan terbaik bagi setiap penumpang melalui armada modern, pelayanan prima, dan standar keselamatan tertinggi.
+                </p>
+            </div>
+            
+            <div class="mission-list mb-5">
+                <h2 class="text-center" style="font-size: 1.5rem; color: var(--secondary-black);">Misi</h2>
+                <ol>
+                    <li>Memberikan pelayanan prima dengan menerapkan esensi layanan dan nilai perusahaan demi mencapai kepuasan pelanggan.</li>
+                    <li>Menyediakan sarana dan prasarana terbaik yang didukung oleh sumber daya manusia yang handal dan profesional.</li>
+                    <li>Memenuhi peraturan pemerintah serta menerapkan Sistem Manajemen Keselamatan Perusahaan Angkutan Umum (SMKPAU), Sistem Manajemen Mutu (ISO), Manajemen Lingkungan, dan Manajemen K3 sebagai wujud komitmen terhadap peningkatan yang berkelanjutan.</li>
+                </ol>
+            </div>
+            
+            <div class="motto pt-4">
+                <h2 class="mb-2">Motto</h2>
+                <h3>Time is Money</h3>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript untuk efek Navbar saat di-scroll (Diambil dari tes2.html)
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar-custom');
+            // Menjadikan navbar solid/blur saat di-scroll
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

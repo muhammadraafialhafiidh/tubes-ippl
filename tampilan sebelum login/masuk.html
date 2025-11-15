@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Masuk</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+         /* Background image full cover */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+                "Open Sans", "Helvetica Neue", sans-serif;
+            color: #000;
+        }
+        /* Blurred background overlay */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../gambar/masuk.png') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(5px);
+            z-index: 1;
+        }
+
+        /* Back arrow button - top left */
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 10;
+        }
+
+        .back-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Card container */
+        .login-card {
+            max-width: 400px;
+            margin: auto;
+            background: #fff;
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* Title */
+        .login-card h4 {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Input fields with shadow and icon */
+
+        .form-control {
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            padding-left: 2.75rem !important;
+            height: 45px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+
+        .position-relative .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 1.2rem;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Password eye icon */
+        .eye-icon-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 1.2rem;
+            user-select: none;
+            padding: 0;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Forgot password link */
+        .forgot-password {
+            font-size: 0.8rem;
+            color: #777;
+            user-select: none;
+            cursor: pointer;
+            text-align: right;
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn-primary-red {
+            background-color: #d21b1b;
+            border: none;
+            font-weight: 700;
+            box-shadow: 5px 5px 15px rgba(210, 27, 27, 0.5);
+            border-radius: 10px;
+            height: 45px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary-red:hover,
+        .btn-primary-red:focus {
+            background-color: #a11515;
+            box-shadow: 6px 6px 20px rgba(161, 21, 21, 0.7);
+        }
+
+        .btn-secondary-gray {
+            background-color: #ccc;
+            border: none;
+            font-weight: 700;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            height: 45px;
+            font-size: 1.1rem;
+            color: #333;
+            margin-top: 0.75rem;
+        }
+
+        .btn-secondary-gray:hover,
+        .btn-secondary-gray:focus {
+            background-color: #aaa;
+            color: #000;
+        }
+
+        /* Divider */
+        .divider-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #666;
+            user-select: none;
+            position: relative;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider-text::before {
+            left: 0;
+        }
+
+        .divider-text::after {
+            right: 0;
+        }
+
+        /* Google button */
+        .btn-google {
+            background-color: #ccc;
+            border: none;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            color: #333;
+            font-weight: 700;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            user-select: none;
+        }
+
+        .btn-google:hover,
+        .btn-google:focus {
+            background-color: #aaa;
+            color: #000;
+            box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-google img {
+            height: 22px;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="background-blur"></div>
+    <!-- Back Arrow -->
+    <a href="./beranda.html" class="back-arrow" title="Back" onclick="history.back(); return false;">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <div class="login-card shadow">
+        <h4>Masuk</h4>
+        <form>
+            <div class="mb-3 position-relative">
+                <span class="input-icon"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" placeholder="User name or Email" aria-label="User name or Email"
+                    required autofocus />
+            </div>
+            <div class="mb-1 position-relative">
+                <span class="input-icon"><i class="bi bi-lock"></i></span>
+                <input type="password" class="form-control" placeholder="Password" id="password" required />
+                <button type="button" class="eye-icon-btn" onclick="togglePassword('password')"
+                    aria-label="Toggle password visibility" tabindex="-1">
+                    <i class="bi bi-eye-slash"></i>
+                </button>
+            </div>
+
+            <div class="forgot-password" onclick="alert('Fungsi lupa password belum diimplementasi')">Forgot Password
+            </div>
+
+            <button type="submit" class="btn btn-primary-red w-100 mt-3 mb-2">Masuk</button>
+            <button type="button" class="btn btn-secondary-gray w-100" onclick="location.href='./daftar.html'">Daftar</button>
+
+            <div class="divider-text">Or Continue With</div>
+
+            <button type="button" class="btn-google w-100" onclick="alert('Login dengan Google belum diimplementasi')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+                    alt="Google Logo" />
+                Google
+            </button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            } else {
+                input.type = "password";
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            }
+        }
+    </script>
+</body>
+
+</html>

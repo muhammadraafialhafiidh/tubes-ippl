@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daftar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+         /* Background image full cover */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+                "Open Sans", "Helvetica Neue", sans-serif;
+            color: #000;
+        }
+        /* Blurred background overlay */
+        .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../gambar/masuk.png') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(5px);
+            z-index: 1;
+        }
+        /* Container form */
+        .register-container {
+            max-width: 440px;
+            background: white;
+            border-radius: 35px;
+            box-shadow: 0 5px 15px rgb(0 0 0 / 0.25);
+            padding: 2.5rem 2rem;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* Tombol kembali panah */
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            z-index: 10;
+        }
+
+        .back-arrow:hover {
+            background-color: white;
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Shadow input */
+        .form-control {
+            box-shadow: 4px 4px 10px rgb(0 0 0 / 0.2);
+            border-radius: 10px;
+            padding-left: 3rem;
+            height: 45px;
+        }
+
+        /* Icon dalam input */
+        .input-group-text {
+            background: transparent;
+            border: none;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            pointer-events: none;
+            font-size: 1.2rem;
+        }
+
+        /* Button Daftar */
+        .btn-red {
+            background-color: #d92020;
+            border: none;
+            font-weight: 700;
+            box-shadow: 4px 4px 10px rgb(0 0 0 / 0.15);
+            border-radius: 10px;
+            height: 45px;
+        }
+
+        .btn-red:hover,
+        .btn-red:focus {
+            background-color: #b11a1a;
+            box-shadow: 6px 6px 14px rgb(0 0 0 / 0.25);
+        }
+
+        /* Divider with text */
+        .divider-text {
+            position: relative;
+            text-align: center;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: #6c757d;
+            user-select: none;
+        }
+
+        .divider-text::before,
+        .divider-text::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider-text::before {
+            left: 0;
+        }
+
+        .divider-text::after {
+            right: 0;
+        }
+
+        /* Button Google */
+        .btn-google {
+            background-color: #c9c9c9;
+            border: none;
+            box-shadow: 4px 4px 10px rgb(0 0 0 / 0.15);
+            border-radius: 10px;
+            color: #333;
+            font-weight: 600;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 1rem;
+            user-select: none;
+        }
+
+        .btn-google:hover,
+        .btn-google:focus {
+            background-color: #b0b0b0;
+            box-shadow: 6px 6px 14px rgb(0 0 0 / 0.25);
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Eye icon input */
+        .input-group .form-control[type="password"] {
+            padding-right: 3rem;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #6c757d;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="background-blur"></div>
+    <!-- Back Arrow -->
+    <a href="./beranda.html" class="back-arrow" title="Back">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+
+    <div class="register-container">
+        <h4 class="text-center fw-bold mb-4">DAFTAR</h4>
+
+        <form>
+            <div class="mb-3 position-relative">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control ps-5" placeholder="User name" aria-label="Username" />
+            </div>
+            <div class="mb-3 position-relative">
+                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                <input type="email" class="form-control ps-5" placeholder="Email" aria-label="Email" />
+            </div>
+            <div class="mb-3 position-relative">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input type="password" class="form-control" placeholder="Password" id="password" />
+                <button type="button" class="eye-icon" onclick="togglePassword('password')" tabindex="-1"
+                    aria-label="Toggle password visibility">
+                    <i class="bi bi-eye-slash"></i>
+                </button>
+            </div>
+            <div class="mb-4 position-relative">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input type="password" class="form-control" placeholder="Confirm Password" id="confirm-password" />
+                <button type="button" class="eye-icon" onclick="togglePassword('confirm-password')" tabindex="-1"
+                    aria-label="Toggle confirm password visibility">
+                    <i class="bi bi-eye-slash"></i>
+                </button>
+            </div>
+            <div class="d-grid mb-4">
+                <button type="submit" class="btn btn-red">Daftar</button>
+            </div>
+        </form>
+
+        <div class="divider-text">Or Continue With</div>
+
+        <button class="btn btn-google w-100">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google"
+                style="height: 20px" />
+            <span>Google</span>
+        </button>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            } else {
+                input.type = "password";
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trans Jateng - Kelas Armada</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        /* --- CSS Khusus dari tes2.html --- */
+        :root {
+            --primary-red: #d92329;
+            --dark-red: #8b1317;
+            --secondary-black: #212529;
+            --light-gray: #f8f9fa;
+        }
+
+        .navbar-custom {
+            background-color: transparent !important;
+            padding-top: 0.4rem;
+            padding-bottom: 0.4rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        .navbar-custom.navbar-scrolled {
+            background-color: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #fff !important;
+            font-weight: bolder;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Hapus btn-daftar karena tidak digunakan lagi */
+        /* .btn-daftar { ... } */
+
+        /* --- CSS Khusus Halaman Kelas Armada --- */
+        .header-kelas-armada {
+            background-color: gray;
+            color: white;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .armada-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .armada-card h3 {
+            color: var(--primary-red);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .armada-card img {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-section {
+            padding: 20px;
+        }
+        
+        /* Tata letak gambar-teks bolak-balik */
+        .armada-card:nth-child(odd) .row > div:first-child {
+            order: 2; /* Pindahkan gambar ke kanan untuk ganjil */
+        }
+        .armada-card:nth-child(odd) .row > div:last-child {
+            order: 1; /* Pindahkan teks ke kiri untuk ganjil */
+        }
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .armada-card .row > div:first-child,
+            .armada-card .row > div:last-child {
+                order: initial !important; /* Kembalikan ke urutan normal */
+            }
+            .header-kelas-armada {
+                padding-top: 100px;
+            }
+        }
+
+        /* CSS Khusus Dropdown Profil */
+        .profile-dropdown-icon {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #fff;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+        }
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 0;
+            min-width: 150px;
+            right: 0 !important;
+            left: auto !important;
+            transform: translate(0, 8px) !important;
+            background-color: #fff;
+        }
+        .dropdown-item {
+            font-weight: 600;
+            padding: 10px 15px;
+            color: var(--secondary-black);
+            transition: background-color 0.2s;
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-red);
+            color: white;
+        }
+        /* Mengganti tulisan 'About Me' di Navbar menjadi 'TENTANG KAMI' (sesuai file lama) atau 'ABOUT ME' (sesuai gambar) */
+        .navbar-nav .nav-item:nth-child(3) .nav-link {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom bg-black">
+        <div class="container">
+            <a class="navbar-brand" href="./beranda.html">
+                <img src="../gambar/Logo.png" alt="Logo" width="100" height="65" class="d-inline-block align-text-top me-2" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered"
+                aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavCentered">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./beranda.html">BERANDA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./armada.html">KELAS ARMADA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./tentangkami.html">ABOUT ME</a>
+                    </li>
+                </ul>
+
+                <div class="nav-item dropdown ms-auto">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0;">
+                        <i class="fas fa-user-circle profile-dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">My Profil</a></li>
+                        <li><a class="dropdown-item" href="#">My Tiket</a></li>
+                    </ul>
+                </div>
+                </div>
+        </div>
+    </nav>
+
+    <header class="header-kelas-armada">
+        <div class="container">
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <h1 class="display-4 fw-bold text-xl-center">Pilihan Kelas Armada Trans Jateng</h1>
+        <div class="armada-card">
+            <div class="row align-items-center g-4">
+                <div class="col-md-6">
+                    <img src="../gambar/ka1.png" alt="Bus Double Decker Trans Jateng" class="img-fluid" />
+                </div>
+                <div class="col-md-6 text-section">
+                    <h3>Armada Double Decker – Trans Jateng</h3>
+                    <p>Bus Trans Jateng menghadirkan armada **Double Decker** (dua tingkat) dengan desain modern dan aerodinamis, memberikan pengalaman perjalanan yang lebih **nyaman dan berkelas**. Kombinasi warna merah, putih, dan hitam mencerminkan identitas kuat, kecepatan, serta profesionalitas layanan.</p>
+                    <p>Bagian depan bus menampilkan lampu LED futuristik dan kaca depan lebar untuk visibilitas maksimal. Desain bodi yang ramping dan garis *livery* dinamis di sisi bus menegaskan karakter kecepatan, ketepatan waktu, dan keselamatan, sejalan dengan slogan layanan Trans Jateng. Interior bus didesain luas dengan kursi ergonomis dan sistem pendingin udara yang nyaman, ideal untuk perjalanan jarak menengah maupun jauh antar kota di Jawa Tengah.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="armada-card">
+            <div class="row align-items-center g-4">
+                <div class="col-md-6">
+                    <img src="../gambar/ka2.png" alt="Bus High Deck Trans Jateng" class="img-fluid" />
+                </div>
+                <div class="col-md-6 text-section">
+                    <h3>Armada High Deck – Trans Jateng</h3>
+                    <p>Kelas **High Deck** Trans Jateng menawarkan kenyamanan premium dengan kabin tinggi dan desain modern khas bus pariwisata profesional. Tampilan eksterior didominasi oleh kombinasi warna putih, merah, dan hitam yang elegan serta menonjolkan identitas Trans Jateng sebagai simbol kecepatan, ketepatan, dan keselamatan.</p>
+                    <p>Bus ini menggunakan sasis Mercedes-Benz yang terkenal akan stabilitas dan daya tahan tinggi. Ruang kabin luas dengan posisi tempat duduk yang tinggi memberikan pandangan jalan lebih lega bagi penumpang. Sistem pendingin udara dan kursi ergonomis menambah kenyamanan selama perjalanan antar kota. Armada High Deck ini menjadi pilihan ideal untuk perjalanan kelompok, pariwisata, maupun layanan reguler antarkota di Jawa Tengah.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="armada-card">
+            <div class="row align-items-center g-4">
+                <div class="col-md-6">
+                    <img src="../gambar/k3.png" alt="Bus Medium Trans Jateng" class="img-fluid" />
+                </div>
+                <div class="col-md-6 text-section">
+                    <h3>Armada Medium – Trans Jateng</h3>
+                    <p>Kelas **Medium** (*Royal Big Top*) Trans Jateng merupakan armada dengan desain elegan dan dimensi lebih ringkas, ideal untuk perjalanan **rute menengah** maupun layanan antarkota reguler. Mengusung konsep Jetbus+ modern, bus ini memadukan kenyamanan, efisiensi, dan kecepatan dalam satu paket.</p>
+                    <p>Tampilan eksterior didominasi oleh warna putih dengan aksen merah dan hitam, menciptakan kesan tegas dan dinamis khas Trans Jateng. Kabin dirancang nyaman dengan kursi ergonomis dan sistem pendingin udara yang optimal. Meskipun berukuran lebih kompak dari kelas High Deck dan Double Decker, bus ini tetap menghadirkan kenyamanan dan keamanan terbaik untuk setiap penumpang.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="armada-card">
+            <div class="row align-items-center g-4">
+                <div class="col-md-6">
+                    <img src="../gambar/k4.png" alt="Bus Medium Short Trans Jateng" class="img-fluid" />
+                </div>
+                <div class="col-md-6 text-section">
+                    <h3>Armada Medium Short – Trans Jateng</h3>
+                    <p>Kelas **Medium Short** (*Bus Pariwisata*) Trans Jateng dirancang untuk perjalanan **kelompok kecil** dengan fleksibilitas tinggi dan kenyamanan maksimal. Mengusung desain Jetbus modern, bus ini tampil ringkas namun tetap elegan dengan dominasi warna putih berpadu aksen merah dan hitam khas Trans Jateng.</p>
+                    <p>Ukuran yang lebih *compact* memudahkan mobilitas di berbagai medan, menjadikannya pilihan ideal untuk wisata antar kota, acara rombongan, maupun perjalanan jarak pendek. Interior kabin tetap mengutamakan kenyamanan dengan kursi empuk, pendingin udara, dan pencahayaan yang lembut.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // JavaScript untuk efek Navbar saat di-scroll (Diambil dari tes2.html)
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 0) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
