@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Akun - Trans Jateng</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR STYLES --- */
+        /*.sidebar {
+            width: 280px;
+            background-color: #981b20;
+            min-height: 100vh;
+            color: white;
+            border-top-right-radius: 60px;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .logo-area { text-align: center; margin-bottom: 30px; }
+        .logo-img { max-width: 80%; height: auto; margin-bottom: 5px; filter: brightness(0) invert(1); }
+
+        .sidebar-box-style {
+            background-color: #83161a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: -3px 3px 0px rgba(0,0,0,0.2); 
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .btn-profile { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0; }
+        .profile-arrow { margin-left: auto; transition: transform 0.3s ease; }
+        .btn-profile[aria-expanded="true"] .profile-arrow { transform: rotate(180deg); }
+        .user-avatar { font-size: 35px; margin-right: 15px; }
+
+        .profile-collapse-area {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 2px solid rgba(255,255,255,0.2);
+            border-right: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .logout-btn { color: #ffcccc; text-decoration: none; font-size: 0.9rem; display: block; padding: 8px 10px; border-radius: 5px; transition: 0.2s; }
+        .logout-btn:hover { background-color: #b0242a; color: white; }
+
+        .menu-btn { margin-bottom: 15px; }
+        .menu-btn:hover, .btn-profile:hover { background-color: #b0242a; color: white; }
+        .menu-btn.active { background-color: #b0242a; box-shadow: inset -2px 2px 5px rgba(0,0,0,0.2); }
+*/
+            .sidebar {
+            width: 280px;
+            background-color: #981b20;
+            min-height: 100vh;
+            color: white;
+            border-top-right-radius: 60px;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .logo-area { text-align: center; margin-bottom: 30px; }
+        .logo-img { max-width: 80%; height: auto; margin-bottom: 5px; filter: brightness(0) invert(1); }
+
+        .sidebar-box-style {
+            background-color: #83161a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.726); 
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .btn-profile { 
+            display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0; 
+        }
+        
+        .profile-arrow { margin-left: auto; transition: transform 0.3s ease; }
+        .btn-profile[aria-expanded="true"] .profile-arrow { transform: rotate(180deg); }
+        .user-avatar { font-size: 35px; margin-right: 15px; }
+
+        .profile-collapse-area {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 2px solid rgba(255,255,255,0.2);
+            border-right: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .logout-btn { color: #ffcccc; text-decoration: none; font-size: 0.9rem; display: block; padding: 8px 10px; border-radius: 5px; transition: 0.2s; }
+        .logout-btn:hover { background-color: #b0242a; color: white; }
+
+        .menu-btn { margin-bottom: 15px; }
+        .menu-btn:hover, .btn-profile:hover { background-color: #b0242a; color: white; }
+        .menu-btn.active { background-color: #b0242a; box-shadow: inset 3px -3px 0px rgba(0, 0, 0, 0.671); }
+
+
+        /* --- MAIN CONTENT STYLES --- */
+        .main-content { margin-left: 280px; padding: 40px; }
+        .page-title { font-weight: 700; color: #000; margin-bottom: 20px; }
+        
+        .content-container-list { 
+            background-color: white; 
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.05); 
+            min-height: 500px; 
+        }
+
+        .user-item { 
+            background: white; 
+            border-radius: 10px; 
+            padding: 15px 25px; 
+            margin-bottom: 15px; 
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.1); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            border-left: 5px solid #ddd; 
+        }
+        .user-text { font-weight: 700; font-size: 1.1rem; color: #000; text-transform: uppercase;}
+        .action-icons i { font-size: 1.2rem; cursor: pointer; margin-left: 15px; }
+        .icon-edit { color: #00c853; }
+        .icon-delete { color: #d50000; }
+
+        /* --- EDIT VIEW STYLES --- */
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-pic-large { font-size: 150px; color: #e0e0e0; background: white; border-radius: 50%; margin-bottom: 20px; }
+        .user-id-badge { background: white; border-radius: 8px; padding: 8px 20px; font-weight: 700; box-shadow: -2px 2px 5px rgba(0,0,0,0.15); font-size: 0.9rem; text-transform: uppercase; }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.05); 
+            height: 100%;
+            position: relative;
+        }
+
+        .input-box-custom {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.1); 
+            padding: 8px 15px;
+            margin-bottom: 25px;
+            border: 1px solid transparent;
+        }
+
+        .input-box-custom i { color: #777; font-size: 1.2rem; width: 30px; text-align: center; }
+        .input-box-custom input { border: none; width: 100%; padding: 10px; outline: none; font-weight: 500; color: #555; background: transparent; }
+        
+        /* Cursor pointer untuk ikon mata */
+        .input-box-custom .toggle-password { cursor: pointer; color: #999; }
+        .input-box-custom .toggle-password:hover { color: #555; }
+
+        .btn-kembali {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            float: right;
+            box-shadow: -2px 2px 4px rgba(0,0,0,0.2);
+            margin-top: 20px;
+        }
+        .btn-kembali:hover { background-color: #b71c1c; color: white; }
+
+        /* --- MODAL STYLES --- */
+        .modal-content-custom { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-header-custom { background-color: #981b20; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px; }
+        .modal-footer-custom { border-top: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-area">
+            <img src="../gambar/Logo.png" alt="Trans Jateng Logo" class="logo-img">
+        </div>
+
+        <div class="sidebar-box-style btn-profile" data-bs-toggle="collapse" href="#collapseProfile" role="button" aria-expanded="false" aria-controls="collapseProfile">
+            <i class="fas fa-circle-user user-avatar"></i>
+            <div class="text-start">
+                <div class="fw-bold" style="font-size: 1rem; line-height: 1.2;">Admin</div>
+                <div style="font-size: 0.75rem; opacity: 0.8;">Staff</div>
+            </div>
+            <i class="fas fa-chevron-down profile-arrow"></i>
+        </div>
+
+        <div class="collapse" id="collapseProfile">
+            <div class="profile-collapse-area">
+                <!-- <a href="#" class="logout-btn"><i class="fas fa-user-gear me-2"></i> Pengaturan</a> -->
+                <a href="#" class="logout-btn"><i class="fas fa-right-from-bracket me-2"></i> Logout</a>
+            </div>
+        </div>
+
+        <nav class="flex-grow-1 mt-3">
+            <a href="../admin/dasbord.html" class="menu-btn sidebar-box-style">DASHBOARD</a>
+            <a href="../admin/kelolatkt.html" class="menu-btn sidebar-box-style">KELOLA TIKET</a>
+            <a href="../admin/kelolaakn.html" class="menu-btn sidebar-box-style active">KELOLA AKUN</a>
+            <a href="../admin/laporan.html" class="menu-btn sidebar-box-style">LAPORAN KEUANGAN</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">KELOLA AKUN</h2>
+
+        <div id="view-list-user" class="content-container-list">
+            
+            <div class="user-item">
+                <div class="user-text">USER 000000001</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                    <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                </div>
+            </div>
+
+            <div class="user-item">
+                <div class="user-text">USER 000000002</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                    <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                </div>
+            </div>
+
+            <div class="user-item">
+                <div class="user-text">USER 000000003</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                    <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                </div>
+            </div>
+            <div class="user-item">
+                <div class="user-text">USER 000000004</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                    <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-edit-user" style="display: none;">
+            <div class="row h-100">
+                <div class="col-md-5 mb-4">
+                    <div class="profile-card">
+                        <i class="fas fa-circle-user profile-pic-large"></i>
+                        <div class="user-id-badge">USER 000000001</div>
+                    </div>
+                </div>
+
+                <div class="col-md-7 mb-4">
+                    <div class="form-card">
+                        
+                        <div class="input-box-custom">
+                            <i class="fas fa-user"></i>
+                            <input type="text" value="M RAAFI AL HAFIT" placeholder="Nama Lengkap">
+                        </div>
+
+                        <div class="input-box-custom">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" value="user@example.com" placeholder="Email Address">
+                        </div>
+
+                        <div class="input-box-custom">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" value="password123" placeholder="Password" id="passwordInput">
+                            <i class="fas fa-eye toggle-password" id="togglePasswordBtn"></i>
+                        </div>
+
+                        <button type="button" class="btn-kembali" id="btn-kembali">Kembali</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title fw-bold" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-circle-exclamation text-danger mb-3" style="font-size: 3rem;"></i>
+                    <p class="mb-0 fw-bold">Apakah Anda yakin ingin menghapus User ini?</p>
+                    <small class="text-muted">Tindakan ini tidak dapat dibatalkan.</small>
+                </div>
+                <div class="modal-footer modal-footer-custom justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger px-4" style="background-color: #d50000;">Ya, Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const viewList = document.getElementById('view-list-user');
+        const viewEdit = document.getElementById('view-edit-user');
+        const btnKembali = document.getElementById('btn-kembali');
+        
+        // Element Password
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+
+        // 1. Navigation Logic
+        document.querySelectorAll('.btn-edit-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                viewList.style.display = 'none';
+                viewEdit.style.display = 'block';
+            });
+        });
+
+        btnKembali.addEventListener('click', () => {
+            viewEdit.style.display = 'none';
+            viewList.style.display = 'block';
+        });
+
+        document.querySelectorAll('.btn-delete-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                deleteModal.show();
+            });
+        });
+
+        // 2. TOGGLE PASSWORD LOGIC (FITUR BARU)
+        togglePasswordBtn.addEventListener('click', function() {
+            // Cek tipe input saat ini
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            
+            // Ubah tipe input
+            passwordInput.setAttribute('type', type);
+            
+            // Ubah ikon (Mata -> Mata Dicoret)
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trans Jateng - Profil Saya</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #d92329;
+            --dark-red: #b01c21;
+            --bg-color: #f8f9fa;
+            --text-grey: #888888;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif; /* Menggunakan font yang lebih modern */
+        }
+
+        /* --- Tombol Kembali (Back Arrow) --- */
+        .btn-back {
+            font-size: 1.5rem;
+            color: black;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* --- Card Styling (Container Utama) --- */
+        .custom-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            position: relative;
+        }
+
+        /* --- Bagian Kiri (Avatar) --- */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-circle {
+            width: 140px;
+            height: 140px;
+            background-color: #e6e6e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .avatar-icon {
+            font-size: 5rem;
+            color: #c4c4c4;
+        }
+
+        .edit-profile-text {
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .user-badge {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 20px;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Shadow lebih tebal sesuai gambar */
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Bagian Kanan (Form) --- */
+        
+        /* Input Style "Kartu Putih" */
+        .input-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Efek melayang */
+            padding: 12px 20px;
+            margin-bottom: 25px; /* Jarak antar input */
+            display: flex;
+            align-items: center;
+            border-left: 5px solid transparent; /* Untuk alignment visual */
+        }
+
+        .input-card i {
+            font-size: 1.5rem;
+            color: #757575;
+            margin-right: 20px;
+        }
+
+        .input-card input {
+            border: none;
+            width: 100%;
+            font-size: 1.1rem;
+            color: #555;
+            outline: none;
+            background: transparent;
+        }
+        
+        .input-card input::placeholder {
+            color: #aaa;
+        }
+
+        /* Link Ganti Password */
+        .forgot-pass-link {
+            color: var(--text-grey);
+            text-decoration: none;
+            font-size: 0.95rem;
+            float: right;
+            margin-top: -10px;
+            transition: color 0.3s;
+        }
+        
+        .forgot-pass-link:hover {
+            color: var(--primary-red);
+        }
+
+        /* --- Area Tombol Bawah --- */
+        .action-buttons {
+            margin-top: 80px; /* Spacer agar tombol turun ke bawah */
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn-custom {
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 120px;
+        }
+
+        .btn-custom:active {
+            transform: scale(0.98);
+        }
+
+        /* Tombol Log Out (Putih) */
+        .btn-logout {
+            background: white;
+            color: #666;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-logout:hover {
+            background: #f8f9fa;
+            color: #333;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tombol Simpan (Merah) */
+        .btn-simpan {
+            background-color: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 10px rgba(217, 35, 41, 0.3);
+        }
+
+        .btn-simpan:hover {
+            background-color: var(--dark-red);
+            color: white;
+            box-shadow: 0 6px 15px rgba(217, 35, 41, 0.4);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+        <!-- Header Back Button -->
+        <div class="mb-4">
+            <a href="javascript:history.back()" class="btn-back">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            
+            <!-- KARTU KIRI: Profil & Avatar -->
+            <div class="col-md-5 col-lg-4">
+                <div class="custom-card profile-section justify-content-center">
+                    <div class="avatar-circle">
+                        <i class="bi bi-person-fill avatar-icon"></i>
+                    </div>
+                    
+                    <div class="edit-profile-text">Edit Profil</div>
+
+                    <div class="user-badge">
+                        USER 000000001
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU KANAN: Form & Tombol -->
+            <div class="col-md-7 col-lg-8">
+                <div class="custom-card">
+                    <form>
+                        <!-- Input Nama -->
+                        <div class="input-card">
+                            <i class="bi bi-person-fill"></i>
+                            <input type="text" value="M RAAFI AL HAFIT" placeholder="Nama Lengkap">
+                        </div>
+
+                        <!-- Input Email -->
+                        <div class="input-card">
+                            <i class="bi bi-envelope-fill"></i>
+                            <input type="email" value="user@example.com" placeholder="Email">
+                        </div>
+
+                        <!-- Text Ganti Password (Bukan Tombol) -->
+                        <div class="w-100 clearfix">
+                            <a href="#" class="forgot-pass-link">Ganti Password</a>
+                        </div>
+
+                        <!-- Tombol Aksi di Bawah Kanan -->
+                        <div class="action-buttons">
+                            <button type="button" class="btn-custom btn-logout">
+                                Log Out
+                            </button>
+                            <button type="submit" class="btn-custom btn-simpan">
+                                Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

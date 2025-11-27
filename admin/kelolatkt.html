@@ -1,0 +1,1161 @@
+<!-- <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trans Jateng - Kelola Tiket</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- Sidebar Styling --- */
+        .sidebar {
+            min-height: 100vh;
+            width: 280px;
+            background-color: #9f1c22; /* Warna Merah Trans Jateng */
+            color: white;
+            position: fixed;
+            border-bottom-right-radius: 60px; /* Lengkungan bawah sidebar */
+            border-top-right-radius: 60px;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .user-avatar {
+            font-size: 40px;
+            margin-right: 15px;
+        }
+
+        .nav-btn {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 12px 20px;
+            text-align: left;
+            background-color: #8a161b; /* Merah lebih gelap untuk tombol */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: #751216;
+            color: #ddd;
+        }
+
+        .nav-btn.active {
+            border-left: 5px solid white; /* Indikator aktif */
+        }
+
+        /* --- Content Styling --- */
+        .main-content {
+            margin-left: 280px; /* Lebar sidebar */
+            padding: 40px;
+        }
+
+        .page-title {
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .card-custom {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-height: 500px;
+            position: relative;
+        }
+
+        /* --- List View Items --- */
+        .ticket-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+        }
+
+        .action-icons i {
+            font-size: 1.2rem;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .icon-edit { color: #00c853; } /* Hijau */
+        .icon-delete { color: #d50000; } /* Merah */
+
+        /* --- Form View Styling --- */
+        .form-input-custom {
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #555;
+            background-color: white;
+        }
+        
+        .form-input-custom::placeholder {
+            color: #888;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-custom-red {
+            background-color: #9f1c22;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-custom-red:hover {
+            background-color: #8a161b;
+            color: white;
+        }
+
+        .btn-custom-grey {
+            background-color: #808080;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-custom-grey:hover {
+            background-color: #666;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-section">
+            <i class="fas fa-bus logo-icon"></i>
+            <h5 class="fw-bold">TRANS JATENG</h5>
+        </div>
+        
+        <div class="user-profile">
+            <i class="fas fa-user-circle user-avatar"></i>
+            <div>
+                <div class="fw-bold">Admin</div>
+                <small>Staff</small>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="#" class="nav-btn">DASHBOARD</a>
+            <a href="#" class="nav-btn active">KELOLA TIKET</a>
+            <a href="#" class="nav-btn">KELOLA AKUN</a>
+            <a href="#" class="nav-btn">LAPORAN KEUANGAN</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">KELOLA TIKET</h2>
+
+        <div class="card-custom">
+            
+            <div id="view-list">
+                <div class="d-flex justify-content-end mb-4">
+                    <button class="btn-custom-red" onclick="showForm()">TAMBAH TIKET</button>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="w-100 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>PURWOKERTO <i class="fas fa-arrow-right mx-2"></i> SEMARANG</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="me-5">(12 : 30)</span>
+                            <div class="action-icons">
+                                <i class="fas fa-pen-square icon-edit"></i>
+                                <i class="fas fa-trash icon-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="w-100 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>SEMARANG <i class="fas fa-arrow-right mx-2"></i> SOLO</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="me-5">(12 : 30)</span>
+                            <div class="action-icons">
+                                <i class="fas fa-pen-square icon-edit"></i>
+                                <i class="fas fa-trash icon-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="w-100 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>SOLO <i class="fas fa-arrow-right mx-2"></i> JOGJA</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="me-5">(12 : 30)</span>
+                            <div class="action-icons">
+                                <i class="fas fa-pen-square icon-edit"></i>
+                                <i class="fas fa-trash icon-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="w-100 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span>JOGJA <i class="fas fa-arrow-right mx-2"></i> PURWOKERTO</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="me-5">(12 : 30)</span>
+                            <div class="action-icons">
+                                <i class="fas fa-pen-square icon-edit"></i>
+                                <i class="fas fa-trash icon-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-form" style="display: none;">
+                <h4 class="fw-bold mb-4">TAMBAH TIKET</h4>
+                
+                <form>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="KOTA KEBERANGKATAN">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="TERMINAL KEBERANGKATAN">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="TANGGAL KEBERANGKATAN" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="JENIS BUS">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="KOTA TUJUAN">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="TERMINAL TUJUAN">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="JAM KEBERANGKATAN" onfocus="(this.type='time')" onblur="(this.type='text')">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-input-custom" placeholder="HARGA">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4 gap-2">
+                        <button type="button" class="btn-custom-grey" onclick="showList()">BATAL</button>
+                        <button type="button" class="btn-custom-red">SIMPAN TIKET</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Fungsi untuk menampilkan Form dan menyembunyikan List
+        function showForm() {
+            document.getElementById('view-list').style.display = 'none';
+            document.getElementById('view-form').style.display = 'block';
+        }
+
+        // Fungsi untuk menampilkan List dan menyembunyikan Form (Tombol Batal)
+        function showList() {
+            document.getElementById('view-form').style.display = 'none';
+            document.getElementById('view-list').style.display = 'block';
+        }
+    </script>
+</body>
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Tiket - Trans Jateng</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR STYLES --- */
+        .sidebar {
+            width: 280px;
+            background-color: #981b20; /* Merah gelap */
+            min-height: 100vh;
+            color: white;
+            border-top-right-radius: 60px;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Logo Area */
+        .logo-area {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        /* GANTI SRC IINI DENGAN PATH LOGO PNG ANDA */
+        .logo-img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 5px;
+            /* Filter ini opsional, agar logo terlihat putih jika aslinya berwarna gelap */
+            filter: brightness(0) invert(1); 
+        }
+
+        /* User Profile Dropdown Wrapper */
+        .user-profile-dropdown {
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        /* Base style untuk kotak di sidebar (Profile & Menu) */
+        .sidebar-box-style {
+            background-color: #83161a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            /* Shadow hanya di KIRI dan BAWAH */
+            box-shadow: -3px 3px 0px rgba(0,0,0,0.2); 
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        /* Gaya khusus untuk tombol profile (karena dia dropdown toggle) */
+        .btn-profile {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        /* Menyesuaikan panah dropdown bawaan bootstrap */
+        .btn-profile::after {
+            margin-left: auto; /* Geser panah ke paling kanan */
+        }
+
+        .user-avatar {
+            font-size: 35px;
+            margin-right: 15px;
+        }
+
+        /* Menu Dropdown Logout */
+        .dropdown-menu-dark-red {
+            background-color: #981b20;
+            border: none;
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+        }
+        .dropdown-menu-dark-red .dropdown-item {
+            color: white;
+        }
+        .dropdown-menu-dark-red .dropdown-item:hover {
+            background-color: #b0242a;
+        }
+
+        /* Menu Buttons Standard */
+        .menu-btn {
+            margin-bottom: 15px;
+        }
+
+        .menu-btn:hover, .btn-profile:hover {
+            background-color: #b0242a;
+            color: white;
+        }
+
+        .menu-btn.active {
+            background-color: #b0242a;
+            box-shadow: inset -2px 2px 5px rgba(0,0,0,0.2); /* Efek pressed */
+        }
+
+
+        /* --- MAIN CONTENT STYLES --- */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .page-title {
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        /* Putih Container Besar */
+        .content-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            /* Shadow KIRI dan BAWAH (offset x negatif, y positif) */
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.05);
+            min-height: 500px;
+        }
+
+        /* Tombol Tambah */
+        .btn-tambah {
+            background-color: #981b20;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 8px 20px;
+            border: none;
+            /* Shadow KIRI dan BAWAH kecil untuk tombol */
+            box-shadow: -2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-tambah:hover {
+            background-color: #b0242a;
+            color: white;
+        }
+
+        /* List Item Tiket */
+        .ticket-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 15px;
+            /* Shadow KIRI dan BAWAH (offset x negatif, y positif) */
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 5px solid #ddd;
+        }
+        
+        .route-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #000;
+        }
+
+        .time-text {
+            font-weight: 700;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        .action-icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .icon-edit { color: #00c853; }
+        .icon-delete { color: #d50000; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-area">
+            <img src="../gambar/Logo.png" alt="Trans Jateng Logo" class="logo-img">
+            </div>
+
+        <div class="dropdown user-profile-dropdown">
+            <button class="btn sidebar-box-style btn-profile dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-circle-user user-avatar"></i>
+                <div class="text-start">
+                    <div class="fw-bold" style="font-size: 1rem; line-height: 1.2;">Admin</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Staff</div>
+                </div>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark-red">
+                <li><a class="dropdown-item" href="#"><i class="fas fa-user-gear me-2"></i> Pengaturan Akun</a></li>
+                <li><hr class="dropdown-divider" style="border-color: rgba(255,255,255,0.2);"></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-right-from-bracket me-2"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <nav class="flex-grow-1">
+            <a href="#" class="menu-btn sidebar-box-style">DASHBOARD</a>
+            <a href="#" class="menu-btn sidebar-box-style active">KELOLA TIKET</a>
+            <a href="#" class="menu-btn sidebar-box-style">KELOLA AKUN</a>
+            <a href="#" class="menu-btn sidebar-box-style">LAPORAN KEUANGAN</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">KELOLA TIKET</h2>
+
+        <div class="content-container">
+            <div class="d-flex justify-content-end mb-4">
+                <button class="btn btn-tambah">TAMBAH TIKET</button>
+            </div>
+
+            <div class="ticket-item">
+                <div class="route-text">
+                    PURWOKERTO <i class="fas fa-arrow-right mx-2"></i> SEMARANG
+                </div>
+                <div class="time-text">(12 : 30)</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit"></i>
+                    <i class="fas fa-trash-can icon-delete"></i>
+                </div>
+            </div>
+
+            <div class="ticket-item">
+                <div class="route-text">
+                    SEMARANG <i class="fas fa-arrow-right mx-2"></i> SOLO
+                </div>
+                <div class="time-text">(12 : 30)</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit"></i>
+                    <i class="fas fa-trash-can icon-delete"></i>
+                </div>
+            </div>
+
+            <div class="ticket-item">
+                <div class="route-text">
+                    SOLO <i class="fas fa-arrow-right mx-2"></i> JOGJA
+                </div>
+                <div class="time-text">(12 : 30)</div>
+                <div class="action-icons">
+                    <i class="fas fa-pen-to-square icon-edit"></i>
+                    <i class="fas fa-trash-can icon-delete"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Tiket - Trans Jateng</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR (Sama seperti sebelumnya) --- */
+        .sidebar {
+            width: 280px;
+            background-color: #981b20;
+            min-height: 100vh;
+            color: white;
+            border-top-right-radius: 60px;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-area { text-align: center; margin-bottom: 30px; }
+        .logo-img { max-width: 80%; height: auto; margin-bottom: 5px; filter: brightness(0) invert(1); }
+
+        .sidebar-box-style {
+            background-color: #83161a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: -3px 3px 0px rgba(0,0,0,0.2); 
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-box-style:hover { background-color: #b0242a; color: white; }
+        .sidebar-box-style.active { background-color: #b0242a; box-shadow: inset -2px 2px 5px rgba(0,0,0,0.2); }
+
+        .btn-profile { display: flex; align-items: center; justify-content: flex-start; }
+        .btn-profile::after { margin-left: auto; }
+        .user-avatar { font-size: 35px; margin-right: 15px; }
+        .dropdown-menu-dark-red { background-color: #981b20; box-shadow: -2px 2px 5px rgba(0,0,0,0.2); }
+        .dropdown-menu-dark-red .dropdown-item { color: white; }
+        .dropdown-menu-dark-red .dropdown-item:hover { background-color: #b0242a; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .page-title { font-weight: 700; color: #000; margin-bottom: 20px; }
+
+        .content-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: -5px 5px 10px rgba(0,0,0,0.05);
+            min-height: 500px;
+            position: relative;
+        }
+
+        /* Tombol Tambah (Merah) */
+        .btn-red-custom {
+            background-color: #981b20;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 25px;
+            border: none;
+            box-shadow: -2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-red-custom:hover { background-color: #b0242a; color: white; }
+
+        /* Tombol Batal (Abu-abu) */
+        .btn-grey-custom {
+            background-color: #808080;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 25px;
+            border: none;
+            box-shadow: -2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-grey-custom:hover { background-color: #666; color: white; }
+
+        /* Item List Tiket */
+        .ticket-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin-bottom: 15px;
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 5px solid #ddd;
+        }
+        
+        .route-text { font-weight: 700; font-size: 1.1rem; }
+        .time-text { font-weight: 700; margin-left: auto; margin-right: 40px; }
+        .action-icons i { font-size: 1.2rem; cursor: pointer; margin-left: 15px; }
+        .icon-edit { color: #00c853; }
+        .icon-delete { color: #d50000; }
+
+        /* --- FORM STYLES (Baru) --- */
+        .form-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input Box Style sesuai gambar */
+        .custom-input {
+            border: none;
+            background-color: #fff;
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.1); /* Shadow Kiri Bawah */
+            border-radius: 8px;
+            padding: 12px 15px;
+            width: 100%;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .custom-input::placeholder {
+            color: #888;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.2);
+            border-left: 4px solid #981b20; /* Sedikit aksen saat diklik */
+        }
+        
+        /* Helper class untuk toggle view */
+        .d-none { display: none !important; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-area">
+            <img src="../gambar/Logo.png" alt="Logo" class="logo-img">
+        </div>
+
+        <div class="dropdown user-profile-dropdown mb-4">
+            <button class="btn sidebar-box-style btn-profile dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="fas fa-circle-user user-avatar"></i>
+                <div class="text-start">
+                    <div class="fw-bold" style="font-size: 1rem;">Admin</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Staff</div>
+                </div>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark-red">
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+        </div>
+
+        <nav class="flex-grow-1">
+            <a href="#" class="menu-btn sidebar-box-style">DASHBOARD</a>
+            <a href="#" class="menu-btn sidebar-box-style active">KELOLA TIKET</a>
+            <a href="#" class="menu-btn sidebar-box-style">KELOLA AKUN</a>
+            <a href="#" class="menu-btn sidebar-box-style">LAPORAN KEUANGAN</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">KELOLA TIKET</h2>
+
+        <div class="content-container">
+            
+            <div id="view-list">
+                <div class="d-flex justify-content-end mb-4">
+                    <button class="btn btn-red-custom" onclick="showForm()">TAMBAH TIKET</button>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="route-text">PURWOKERTO <i class="fas fa-arrow-right mx-2"></i> SEMARANG</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit"></i>
+                        <i class="fas fa-trash-can icon-delete"></i>
+                    </div>
+                </div>
+                <div class="ticket-item">
+                    <div class="route-text">SEMARANG <i class="fas fa-arrow-right mx-2"></i> SOLO</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit"></i>
+                        <i class="fas fa-trash-can icon-delete"></i>
+                    </div>
+                </div>
+                <div class="ticket-item">
+                    <div class="route-text">SOLO <i class="fas fa-arrow-right mx-2"></i> JOGJA</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit"></i>
+                        <i class="fas fa-trash-can icon-delete"></i>
+                    </div>
+                </div>
+                <div class="ticket-item">
+                    <div class="route-text">JOGJA <i class="fas fa-arrow-right mx-2"></i> PURWOKERTO</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit"></i>
+                        <i class="fas fa-trash-can icon-delete"></i>
+                    </div>
+                </div>
+            </div>
+            <div id="view-form" class="d-none">
+                <h4 class="form-title">TAMBAH TIKET</h4>
+                
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="custom-input" placeholder="KOTA KEBERANGKATAN">
+                            <input type="text" class="custom-input" placeholder="TERMINAL KEBERANGKATAN">
+                            <input type="text" class="custom-input" placeholder="TANGGAL KEBERANGKATAN" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            <select class="custom-input" style="color: #888;">
+                                <option selected disabled>JENIS BUS</option>
+                                <option style="color: black;">Ekonomi</option>
+                                <option style="color: black;">Eksekutif</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" class="custom-input" placeholder="KOTA TUJUAN">
+                            <input type="text" class="custom-input" placeholder="TERMINAL TUJUAN">
+                            <input type="text" class="custom-input" placeholder="JAM KEBERANGKATAN" onfocus="(this.type='time')" onblur="(this.type='text')">
+                            <input type="number" class="custom-input" placeholder="HARGA">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-3 mt-4">
+                        <button type="button" class="btn btn-grey-custom" onclick="hideForm()">BATAL</button>
+                        <button type="button" class="btn btn-red-custom" onclick="alert('Tiket Disimpan!'); hideForm();">SIMPAN TIKET</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function showForm() {
+            // Sembunyikan List, Tampilkan Form
+            document.getElementById('view-list').classList.add('d-none');
+            document.getElementById('view-form').classList.remove('d-none');
+        }
+
+        function hideForm() {
+            // Sembunyikan Form, Tampilkan List
+            document.getElementById('view-form').classList.add('d-none');
+            document.getElementById('view-list').classList.remove('d-none');
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Tiket - Trans Jateng</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR STYLES --- */
+        .sidebar {
+            width: 280px;
+            background-color: #981b20;
+            min-height: 100vh;
+            color: white;
+            border-top-right-radius: 60px;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .logo-area { text-align: center; margin-bottom: 30px; }
+        .logo-img { max-width: 80%; height: auto; margin-bottom: 5px; filter: brightness(0) invert(1); }
+
+        .sidebar-box-style {
+            background-color: #83161a;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: -3px 3px 0px rgba(0, 0, 0, 0.726); 
+            transition: all 0.2s;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .btn-profile { 
+            display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0; 
+        }
+        
+        .profile-arrow { margin-left: auto; transition: transform 0.3s ease; }
+        .btn-profile[aria-expanded="true"] .profile-arrow { transform: rotate(180deg); }
+        .user-avatar { font-size: 35px; margin-right: 15px; }
+
+        .profile-collapse-area {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 2px solid rgba(255,255,255,0.2);
+            border-right: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .logout-btn { color: #ffcccc; text-decoration: none; font-size: 0.9rem; display: block; padding: 8px 10px; border-radius: 5px; transition: 0.2s; }
+        .logout-btn:hover { background-color: #b0242a; color: white; }
+
+        .menu-btn { margin-bottom: 15px; }
+        .menu-btn:hover, .btn-profile:hover { background-color: #b0242a; color: white; }
+        .menu-btn.active { background-color: #b0242a; box-shadow: inset 3px -3px 0px rgba(0, 0, 0, 0.671); }
+
+        /* --- MAIN CONTENT STYLES --- */
+        .main-content { margin-left: 280px; padding: 40px; }
+        .page-title { font-weight: 700; color: #000; margin-bottom: 20px; }
+        .content-container { background-color: white; border-radius: 20px; padding: 30px; box-shadow: -5px 5px 10px rgba(0,0,0,0.05); min-height: 500px; }
+        
+        /* Buttons & Items */
+        .btn-tambah { background-color: #981b20; color: white; font-weight: 600; border-radius: 8px; padding: 8px 20px; border: none; box-shadow: -2px 2px 4px rgba(0,0,0,0.2); }
+        .btn-tambah:hover { background-color: #b0242a; color: white; }
+        
+        .ticket-item { background: white; border-radius: 10px; padding: 15px 25px; margin-bottom: 15px; box-shadow: -3px 3px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: space-between; border-left: 5px solid #ddd; }
+        .route-text { font-weight: 700; font-size: 1.1rem; color: #000; }
+        .time-text { font-weight: 700; margin-left: auto; margin-right: 40px; }
+        .action-icons i { font-size: 1.2rem; cursor: pointer; margin-left: 15px; }
+        .icon-edit { color: #00c853; }
+        .icon-delete { color: #d50000; }
+
+        /* --- FORM STYLES --- */
+        .form-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 20px; color: #000; }
+        .form-control-custom { border: none; background-color: white; border-radius: 8px; padding: 12px 15px; font-weight: 600; color: #555; box-shadow: -3px 3px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .form-control-custom:focus { box-shadow: -3px 3px 8px rgba(0,0,0,0.15); outline: none; background-color: #fff; }
+        .btn-action-group { display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; }
+        .btn-batal { background-color: #888; color: white; font-weight: 700; border-radius: 8px; padding: 10px 30px; border: none; box-shadow: -2px 2px 4px rgba(0,0,0,0.2); }
+        .btn-simpan { background-color: #981b20; color: white; font-weight: 700; border-radius: 8px; padding: 10px 30px; border: none; box-shadow: -2px 2px 4px rgba(0,0,0,0.2); }
+        
+        /* --- MODAL CUSTOM STYLE --- */
+        .modal-content-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-header-custom {
+            background-color: #981b20;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .modal-footer-custom { border-top: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-area">
+            <img src="../gambar/Logo.png" alt="Trans Jateng Logo" class="logo-img">
+        </div>
+
+        <div class="sidebar-box-style btn-profile" data-bs-toggle="collapse" href="#collapseProfile" role="button" aria-expanded="false" aria-controls="collapseProfile">
+            <i class="fas fa-circle-user user-avatar"></i>
+            <div class="text-start">
+                <div class="fw-bold" style="font-size: 1rem; line-height: 1.2;">Admin</div>
+                <div style="font-size: 0.75rem; opacity: 0.8;">Staff</div>
+            </div>
+            <i class="fas fa-chevron-down profile-arrow"></i>
+        </div>
+
+        <div class="collapse" id="collapseProfile">
+            <div class="profile-collapse-area">
+                <a href="#" class="logout-btn"><i class="fas fa-right-from-bracket me-2"></i> Logout</a>
+            </div>
+        </div>
+
+        <nav class="flex-grow-1 mt-3">
+            <a href="../admin/dasbord.html" class="menu-btn sidebar-box-style">DASHBOARD</a>
+            <a href="../admin/kelolatkt.html" class="menu-btn sidebar-box-style active">KELOLA TIKET</a>
+            <a href="../admin/kelolaakn.html" class="menu-btn sidebar-box-style">KELOLA AKUN</a>
+            <a href="../admin/laporan.html" class="menu-btn sidebar-box-style">LAPORAN KEUANGAN</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h2 class="page-title">KELOLA TIKET</h2>
+
+        <div class="content-container">
+            
+            <div id="view-list-tiket">
+                <div class="d-flex justify-content-end mb-4">
+                    <button class="btn btn-tambah" id="btn-tambah-trigger">TAMBAH TIKET</button>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="route-text">PURWOKERTO <i class="fas fa-arrow-right mx-2"></i> SEMARANG</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                        <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                    </div>
+                </div>
+
+                <div class="ticket-item">
+                    <div class="route-text">SEMARANG <i class="fas fa-arrow-right mx-2"></i> SOLO</div>
+                    <div class="time-text">(12 : 30)</div>
+                    <div class="action-icons">
+                        <i class="fas fa-pen-to-square icon-edit btn-edit-trigger"></i>
+                        <i class="fas fa-trash-can icon-delete btn-delete-trigger"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-form-tiket" style="display: none;">
+                <h4 class="form-title" id="form-header-title">TAMBAH TIKET</h4>
+                
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-custom" placeholder="KOTA KEBERANGKATAN">
+                            <input type="text" class="form-control form-control-custom" placeholder="TERMINAL KEBERANGKATAN">
+                            <input type="text" class="form-control form-control-custom" placeholder="TANGGAL KEBERANGKATAN" onfocus="(this.type='date')" onblur="(this.type='text')">
+                            <input type="text" class="form-control form-control-custom" placeholder="JENIS BUS">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control form-control-custom" placeholder="KOTA TUJUAN">
+                            <input type="text" class="form-control form-control-custom" placeholder="TERMINAL TUJUAN">
+                            <input type="text" class="form-control form-control-custom" placeholder="JAM KEBERANGKATAN" onfocus="(this.type='time')" onblur="(this.type='text')">
+                            <input type="text" class="form-control form-control-custom" placeholder="HARGA">
+                        </div>
+                    </div>
+
+                    <div class="btn-action-group">
+                        <button type="button" class="btn btn-batal" id="btn-batal">BATAL</button>
+                        <button type="button" class="btn btn-simpan" id="btn-submit-form">SIMPAN TIKET</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title fw-bold" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-circle-exclamation text-danger mb-3" style="font-size: 3rem;"></i>
+                    <p class="mb-0 fw-bold">Apakah Anda yakin ingin menghapus tiket ini?</p>
+                    <small class="text-muted">Tindakan ini tidak dapat dibatalkan.</small>
+                </div>
+                <div class="modal-footer modal-footer-custom justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger px-4" style="background-color: #d50000;">Ya, Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Elemen View
+        const viewList = document.getElementById('view-list-tiket');
+        const viewForm = document.getElementById('view-form-tiket');
+        
+        // Elemen Tombol & Header
+        const btnTambah = document.getElementById('btn-tambah-trigger');
+        const btnBatal = document.getElementById('btn-batal');
+        const formHeader = document.getElementById('form-header-title');
+        const btnSubmit = document.getElementById('btn-submit-form');
+        
+        // Modal Instance
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+
+        // --- FUNGSI GANTI HALAMAN ---
+        function showForm(mode) {
+            viewList.style.display = 'none';
+            viewForm.style.display = 'block';
+
+            if (mode === 'add') {
+                formHeader.innerText = "TAMBAH TIKET";
+                btnSubmit.innerText = "SIMPAN TIKET";
+                // Reset form inputs jika perlu (bisa ditambah di sini)
+            } else if (mode === 'edit') {
+                formHeader.innerText = "EDIT TIKET";
+                btnSubmit.innerText = "UPDATE TIKET";
+                // Di sini nanti bisa tambahkan logika untuk isi otomatis data (value input)
+            }
+        }
+
+        function showList() {
+            viewForm.style.display = 'none';
+            viewList.style.display = 'block';
+        }
+
+        // --- EVENT LISTENER ---
+
+        // 1. Klik Tambah
+        btnTambah.addEventListener('click', () => showForm('add'));
+
+        // 2. Klik Batal
+        btnBatal.addEventListener('click', () => showList());
+
+        // 3. Klik Edit (Looping karena ada banyak tombol edit)
+        document.querySelectorAll('.btn-edit-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showForm('edit');
+            });
+        });
+
+        // 4. Klik Hapus (Looping untuk memunculkan Modal)
+        document.querySelectorAll('.btn-delete-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                deleteModal.show();
+            });
+        });
+
+    </script>
+</body>
+</html>
